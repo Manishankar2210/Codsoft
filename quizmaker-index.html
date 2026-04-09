@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster | Create & Take Quizzes</title>
+    <link rel="stylesheet" href="quizmaker-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo" onclick="showPage('home')">
+                    <i class="fas fa-brain"></i>
+                    <span>QuizMaster</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <a href="#" onclick="showPage('quizList')">Browse Quizzes</a>
+                    <a href="#" onclick="showPage('create')">Create Quiz</a>
+                </div>
+                <div class="nav-auth" id="navAuth">
+                    <button class="btn btn-outline" onclick="showModal('login')">Login</button>
+                    <button class="btn btn-primary" onclick="showModal('register')">Sign Up</button>
+                </div>
+                <div class="nav-user" id="navUser" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="user-btn" onclick="toggleDropdown()">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">User</span>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Home Page -->
+        <main class="page" id="homePage">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Create & Take <span class="gradient-text">Quizzes</span> Online</h1>
+                    <p>Test your knowledge, challenge friends, or create quizzes for learning. Fun, engaging, and completely free!</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-large" onclick="showPage('create')">
+                            <i class="fas fa-plus"></i> Create Quiz
+                        </button>
+                        <button class="btn btn-secondary btn-large" onclick="showPage('quizList')">
+                            <i class="fas fa-play"></i> Take Quiz
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="quiz-preview-card">
+                        <div class="preview-header">
+                            <span class="question-num">Question 3 of 10</span>
+                            <span class="timer"><i class="fas fa-clock"></i> 0:45</span>
+                        </div>
+                        <h3>What is the capital of France?</h3>
+                        <div class="preview-options">
+                            <div class="option">London</div>
+                            <div class="option selected">Paris</div>
+                            <div class="option">Berlin</div>
+                            <div class="option">Madrid</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features">
+                <div class="container">
+                    <h2>Why Choose QuizMaster?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                            <h3>Easy to Create</h3>
+                            <p>Build quizzes in minutes with our intuitive quiz builder.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                            <h3>Instant Results</h3>
+                            <p>Get immediate feedback with detailed score analysis.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-share-alt"></i></div>
+                            <h3>Share Easily</h3>
+                            <p>Share your quizzes with friends and the community.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h3>Works Everywhere</h3>
+                            <p>Take quizzes on any device - desktop, tablet, or mobile.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Popular Quizzes Preview -->
+            <section class="popular-quizzes">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Popular Quizzes</h2>
+                        <a href="#" class="view-all" onclick="showPage('quizList')">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="quizzes-grid" id="popularQuizzesGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Quiz List Page -->
+        <main class="page" id="quizListPage" style="display: none;">
+            <div class="quiz-list-container">
+                <div class="quiz-list-header">
+                    <h1>Browse Quizzes</h1>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="quizSearch" placeholder="Search quizzes..." oninput="searchQuizzes()">
+                    </div>
+                </div>
+                <div class="category-filters">
+                    <button class="category-btn active" onclick="filterByCategory('all')">All</button>
+                    <button class="category-btn" onclick="filterByCategory('Science')">Science</button>
+                    <button class="category-btn" onclick="filterByCategory('History')">History</button>
+                    <button class="category-btn" onclick="filterByCategory('Geography')">Geography</button>
+                    <button class="category-btn" onclick="filterByCategory('Technology')">Technology</button>
+                    <button class="category-btn" onclick="filterByCategory('Entertainment')">Entertainment</button>
+                </div>
+                <div class="quizzes-grid" id="quizListGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Create Quiz Page -->
+        <main class="page" id="createPage" style="display: none;">
+            <div class="create-container">
+                <h1>Create New Quiz</h1>
+                <form id="quizForm" onsubmit="saveQuiz(event)">
+                    <div class="quiz-details-card">
+                        <h2>Quiz Details</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quiz Title</label>
+                                <input type="text" id="quizTitle" placeholder="e.g., World History Quiz" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="quizCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="Science">Science</option>
+                                    <option value="History">History</option>
+                                    <option value="Geography">Geography</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="General Knowledge">General Knowledge</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="quizDescription" placeholder="Briefly describe your quiz..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <div class="questions-header">
+                            <h2>Questions</h2>
+                            <button type="button" class="btn btn-outline" onclick="addQuestion()">
+                                <i class="fas fa-plus"></i> Add Question
+                            </button>
+                        </div>
+                        <div id="questionsContainer">
+                            <!-- Questions will be added here -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="showPage('home')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Quiz</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Take Quiz Page -->
+        <main class="page" id="takeQuizPage" style="display: none;">
+            <div class="take-quiz-container">
+                <!-- Quiz Start Screen -->
+                <div id="quizStartScreen" class="quiz-screen">
+                    <div class="quiz-start-card">
+                        <div class="quiz-start-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h1 id="startQuizTitle">Quiz Title</h1>
+                        <p id="startQuizDescription">Quiz description here</p>
+                        <div class="quiz-meta">
+                            <span><i class="fas fa-list"></i> <span id="startQuestionCount">0</span> Questions</span>
+                            <span><i class="fas fa-tag"></i> <span id="startQuizCategory">Category</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-large" onclick="startQuiz()">
+                            Start Quiz <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions Screen -->
+                <div id="quizQuestionsScreen" class="quiz-screen" style="display: none;">
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span id="questionProgress">1 / 10</span>
+                    </div>
+                    <div class="question-card">
+                        <h2 id="currentQuestion">Question text here?</h2>
+                        <div class="options-container" id="optionsContainer">
+                            <!-- Options will be populated -->
+                        </div>
+                    </div>
+                    <div class="quiz-navigation">
+                        <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()" disabled>
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-success" id="submitBtn" onclick="submitQuiz()" style="display: none;">
+                            Submit Quiz <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results Screen -->
+                <div id="quizResultsScreen" class="quiz-screen" style="display: none;">
+                    <div class="results-card">
+                        <div class="results-icon" id="resultsIcon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h1 id="resultsTitle">Great Job!</h1>
+                        <div class="score-circle">
+                            <span class="score-number" id="scoreNumber">0</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                        <p class="score-text" id="scoreText">You got 8 out of 10 questions correct!</p>
+                        <div class="results-stats">
+                            <div class="stat">
+                                <span class="stat-value" id="correctCount">0</span>
+                                <span class="stat-label">Correct</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="wrongCount">0</span>
+                                <span class="stat-label">Wrong</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="percentScore">0%</span>
+                                <span class="stat-label">Percentage</span>
+                            </div>
+                        </div>
+                        <div class="results-actions">
+                            <button class="btn btn-outline" onclick="reviewAnswers()">
+                                <i class="fas fa-eye"></i> Review Answers
+                            </button>
+                            <button class="btn btn-primary" onclick="retakeQuiz()">
+                                <i class="fas fa-redo"></i> Retake Quiz
+                            </button>
+                        </div>
+                        <button class="btn btn-secondary" onclick="showPage('quizList')">
+                            Browse More Quizzes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Review Answers Screen -->
+                <div id="reviewScreen" class="quiz-screen" style="display: none;">
+                    <div class="review-container">
+                        <h1>Review Answers</h1>
+                        <div id="reviewContent">
+                            <!-- Review content populated by JS -->
+                        </div>
+                        <button class="btn btn-primary" onclick="showResults()">
+                            Back to Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Dashboard Page -->
+        <main class="page" id="dashboardPage" style="display: none;">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h1>My Dashboard</h1>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-edit"></i>
+                        <div class="stat-info">
+                            <h3 id="createdQuizzesCount">0</h3>
+                            <p>Quizzes Created</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-play-circle"></i>
+                        <div class="stat-info">
+                            <h3 id="takenQuizzesCount">0</h3>
+                            <p>Quizzes Taken</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-percentage"></i>
+                        <div class="stat-info">
+                            <h3 id="avgScore">0%</h3>
+                            <p>Avg. Score</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>My Quizzes</h2>
+                    <div id="myQuizzesList" class="my-quizzes-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>Recent Results</h2>
+                    <div id="recentResults" class="recent-results-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('login')">&times;</button>
+                <h2>Welcome Back</h2>
+                <form onsubmit="login(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <p class="modal-footer">Don't have an account? <a href="#" onclick="switchModal('login', 'register')">Sign up</a></p>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal" id="registerModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('register')">&times;</button>
+                <h2>Create Account</h2>
+                <form onsubmit="register(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                </form>
+                <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('register', 'login')">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-brain"></i>
+                        <span>QuizMaster</span>
+                    </div>
+                    <p>Learn, play, and challenge yourself with quizzes on any topic.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <a href="#" onclick="showPage('quizList')">Browse Quizzes</a>
+                    <a href="#" onclick="showPage('create')">Create Quiz</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 QuizMaster. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Toast -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="quizmaker-script.js"></script>
+</body>
+</html>

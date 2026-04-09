@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobConnect | Find Your Dream Job</title>
+    <link rel="stylesheet" href="jobboard-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo" onclick="showPage('home')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>JobConnect</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <a href="#" onclick="showPage('jobs')">Find Jobs</a>
+                    <a href="#" onclick="showPage('employers')">For Employers</a>
+                </div>
+                <div class="nav-auth" id="navAuth">
+                    <button class="btn btn-outline" onclick="showModal('login')">Login</button>
+                    <button class="btn btn-primary" onclick="showModal('register')">Sign Up</button>
+                </div>
+                <div class="nav-user" id="navUser" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="user-btn" onclick="toggleDropdown()">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" onclick="showPage('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('jobs')">Find Jobs</a>
+            <a href="#" onclick="showPage('employers')">For Employers</a>
+            <a href="#" onclick="showModal('login')">Login</a>
+            <a href="#" onclick="showModal('register')">Sign Up</a>
+        </div>
+
+        <!-- Home Page -->
+        <main class="page" id="homePage">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Find Your <span class="gradient-text">Dream Job</span> Today</h1>
+                    <p>Connect with top employers and discover thousands of job opportunities. Your next career move starts here.</p>
+                    
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <div class="search-field">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="heroJobSearch" placeholder="Job title, keywords...">
+                        </div>
+                        <div class="search-field">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="heroLocation" placeholder="City or Remote">
+                        </div>
+                        <button class="btn btn-primary btn-search" onclick="searchJobs()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <strong>10K+</strong>
+                            <span>Active Jobs</span>
+                        </div>
+                        <div class="stat">
+                            <strong>5K+</strong>
+                            <span>Companies</span>
+                        </div>
+                        <div class="stat">
+                            <strong>50K+</strong>
+                            <span>Job Seekers</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Jobs Section -->
+            <section class="featured-jobs">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Featured Jobs</h2>
+                        <a href="#" class="view-all" onclick="showPage('jobs')">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="jobs-grid" id="featuredJobsGrid">
+                        <!-- Jobs will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section class="how-it-works">
+                <div class="container">
+                    <h2>How It Works</h2>
+                    <div class="steps-grid">
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3>Create Account</h3>
+                            <p>Sign up and create your professional profile to get started.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Search Jobs</h3>
+                            <p>Browse thousands of jobs and find the perfect match for you.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <h3>Apply</h3>
+                            <p>Submit your application with just a few clicks.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Get Hired</h3>
+                            <p>Land your dream job and start your new career journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories">
+                <div class="container">
+                    <h2>Popular Categories</h2>
+                    <div class="categories-grid">
+                        <div class="category-card" onclick="filterByCategory('Technology')">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Technology</h3>
+                            <span>2,500+ Jobs</span>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Design')">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Design</h3>
+                            <span>1,200+ Jobs</span>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Marketing')">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Marketing</h3>
+                            <span>1,800+ Jobs</span>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Finance')">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Finance</h3>
+                            <span>1,500+ Jobs</span>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Healthcare')">
+                            <i class="fas fa-heartbeat"></i>
+                            <h3>Healthcare</h3>
+                            <span>900+ Jobs</span>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Education')">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Education</h3>
+                            <span>700+ Jobs</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Jobs Listing Page -->
+        <main class="page" id="jobsPage" style="display: none;">
+            <div class="jobs-page-container">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <div class="filter-section">
+                        <h3>Search</h3>
+                        <div class="filter-input">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="jobSearchInput" placeholder="Search jobs..." oninput="filterJobs()">
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <h3>Job Type</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Full-time" onchange="filterJobs()"> Full-time
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Part-time" onchange="filterJobs()"> Part-time
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Remote" onchange="filterJobs()"> Remote
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Contract" onchange="filterJobs()"> Contract
+                        </label>
+                    </div>
+                    <div class="filter-section">
+                        <h3>Experience Level</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Entry Level" onchange="filterJobs()"> Entry Level
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Mid Level" onchange="filterJobs()"> Mid Level
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="Senior Level" onchange="filterJobs()"> Senior Level
+                        </label>
+                    </div>
+                    <div class="filter-section">
+                        <h3>Salary Range</h3>
+                        <select id="salaryFilter" onchange="filterJobs()">
+                            <option value="">Any</option>
+                            <option value="0-50000">$0 - $50,000</option>
+                            <option value="50000-80000">$50,000 - $80,000</option>
+                            <option value="80000-120000">$80,000 - $120,000</option>
+                            <option value="120000+">$120,000+</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline btn-block" onclick="clearFilters()">Clear Filters</button>
+                </aside>
+
+                <!-- Jobs List -->
+                <div class="jobs-list-container">
+                    <div class="jobs-header">
+                        <h2>All Jobs</h2>
+                        <span id="jobCount">0 jobs found</span>
+                    </div>
+                    <div class="jobs-list" id="jobsList">
+                        <!-- Jobs will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Job Detail Page -->
+        <main class="page" id="jobDetailPage" style="display: none;">
+            <div class="job-detail-container">
+                <div class="job-detail-main" id="jobDetailContent">
+                    <!-- Content populated by JavaScript -->
+                </div>
+                <aside class="job-detail-sidebar">
+                    <div class="apply-card">
+                        <h3>Apply for this job</h3>
+                        <p>Submit your application and resume to get started.</p>
+                        <button class="btn btn-primary btn-block" onclick="showModal('apply')">Apply Now</button>
+                    </div>
+                    <div class="company-card" id="companyCard">
+                        <!-- Company info populated by JavaScript -->
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <!-- Employer Page -->
+        <main class="page" id="employersPage" style="display: none;">
+            <section class="employer-hero">
+                <div class="container">
+                    <h1>Hire the Best Talent</h1>
+                    <p>Post your job openings and connect with qualified candidates</p>
+                    <button class="btn btn-primary btn-large" onclick="currentUser ? showPage('dashboard') : showModal('register')">
+                        Post a Job <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+            <section class="employer-features">
+                <div class="container">
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Access to Talent Pool</h3>
+                            <p>Reach thousands of qualified job seekers actively looking for opportunities.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Quick Hiring</h3>
+                            <p>Streamlined application process to help you hire faster.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>Analytics Dashboard</h3>
+                            <p>Track your job postings performance with detailed analytics.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Dashboard Page -->
+        <main class="page" id="dashboardPage" style="display: none;">
+            <div class="dashboard-container">
+                <!-- Candidate Dashboard -->
+                <div id="candidateDashboard">
+                    <div class="dashboard-header">
+                        <h1>Candidate Dashboard</h1>
+                        <p>Welcome back, <span id="dashboardUserName">User</span>!</p>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="card-info">
+                                <h3 id="applicationCount">0</h3>
+                                <p>Applications</p>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon"><i class="fas fa-bookmark"></i></div>
+                            <div class="card-info">
+                                <h3 id="savedJobsCount">0</h3>
+                                <p>Saved Jobs</p>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon"><i class="fas fa-eye"></i></div>
+                            <div class="card-info">
+                                <h3>125</h3>
+                                <p>Profile Views</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2>My Applications</h2>
+                        <div class="applications-list" id="applicationsList">
+                            <!-- Applications populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2>Update Profile</h2>
+                        <form class="profile-form" onsubmit="updateProfile(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="profileName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="profileEmail" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="profilePhone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input type="text" id="profileLocation">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Skills (comma-separated)</label>
+                                <input type="text" id="profileSkills" placeholder="JavaScript, React, Node.js...">
+                            </div>
+                            <div class="form-group">
+                                <label>Resume (PDF)</label>
+                                <input type="file" id="profileResume" accept=".pdf">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Employer Dashboard -->
+                <div id="employerDashboard" style="display: none;">
+                    <div class="dashboard-header">
+                        <h1>Employer Dashboard</h1>
+                        <button class="btn btn-primary" onclick="showModal('postJob')">
+                            <i class="fas fa-plus"></i> Post New Job
+                        </button>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                            <div class="card-info">
+                                <h3 id="postedJobsCount">0</h3>
+                                <p>Posted Jobs</p>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                            <div class="card-info">
+                                <h3 id="totalApplicants">0</h3>
+                                <p>Total Applicants</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2>My Job Postings</h2>
+                        <div class="posted-jobs-list" id="postedJobsList">
+                            <!-- Posted jobs populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <!-- Login Modal -->
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('login')">&times;</button>
+                <h2>Welcome Back</h2>
+                <p>Login to your account</p>
+                <form onsubmit="login(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <p class="modal-footer">Don't have an account? <a href="#" onclick="switchModal('login', 'register')">Sign up</a></p>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal" id="registerModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('register')">&times;</button>
+                <h2>Create Account</h2>
+                <p>Join JobConnect today</p>
+                <form onsubmit="register(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label>I am a</label>
+                        <select id="registerRole" required>
+                            <option value="candidate">Job Seeker</option>
+                            <option value="employer">Employer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+                <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('register', 'login')">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Apply Modal -->
+        <div class="modal" id="applyModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal('apply')">&times;</button>
+                <h2>Apply for Job</h2>
+                <p id="applyJobTitle"></p>
+                <form onsubmit="submitApplication(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="applyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="applyEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="applyPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Resume (PDF)</label>
+                        <input type="file" id="applyResume" accept=".pdf" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Letter</label>
+                        <textarea id="applyCoverLetter" rows="4" placeholder="Tell us why you're a great fit..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Post Job Modal -->
+        <div class="modal" id="postJobModal">
+            <div class="modal-content modal-large">
+                <button class="modal-close" onclick="closeModal('postJob')">&times;</button>
+                <h2>Post a New Job</h2>
+                <form onsubmit="postJob(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" id="jobTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" id="jobCompany" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="jobLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Job Type</label>
+                            <select id="jobType" required>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Contract">Contract</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="jobCategory" required>
+                                <option value="Technology">Technology</option>
+                                <option value="Design">Design</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Education">Education</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Salary Range</label>
+                            <input type="text" id="jobSalary" placeholder="e.g., $80,000 - $100,000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea id="jobDescription" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Requirements (one per line)</label>
+                        <textarea id="jobRequirements" rows="4" placeholder="Bachelor's degree in Computer Science&#10;3+ years of experience&#10;Strong communication skills"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Post Job</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-briefcase"></i>
+                        <span>JobConnect</span>
+                    </div>
+                    <p>Your gateway to career opportunities. Find jobs, hire talent, and grow your career with us.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>For Job Seekers</h4>
+                    <ul>
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JobConnect. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="jobboard-script.js"></script>
+</body>
+</html>
