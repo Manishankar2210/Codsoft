@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopEase | Online Shopping Made Easy</title>
     <link rel="stylesheet" href="ecommerce-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div id="app">
         <!-- Navigation -->
@@ -33,7 +36,8 @@
                         <div class="dropdown" id="userDropdown">
                             <div class="dropdown-content" id="guestMenu">
                                 <a href="#" onclick="showModal('login')"><i class="fas fa-sign-in-alt"></i> Login</a>
-                                <a href="#" onclick="showModal('register')"><i class="fas fa-user-plus"></i> Register</a>
+                                <a href="#" onclick="showModal('register')"><i class="fas fa-user-plus"></i>
+                                    Register</a>
                             </div>
                             <div class="dropdown-content" id="loggedInMenu" style="display:none;">
                                 <a href="#" onclick="showPage('orders')"><i class="fas fa-box"></i> My Orders</a>
@@ -68,7 +72,9 @@
                     </button>
                 </div>
                 <div class="hero-image">
-                    <img src="https://via.placeholder.com/500x400" alt="Featured Products">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80"
+                        alt="Featured Products"
+                        style="object-fit: cover; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
                 </div>
             </section>
 
@@ -102,7 +108,8 @@
                 <div class="container">
                     <div class="section-header">
                         <h2>Featured Products</h2>
-                        <a href="#" class="view-all" onclick="showPage('products')">View All <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="view-all" onclick="showPage('products')">View All <i
+                                class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="products-grid" id="featuredProductsGrid">
                         <!-- Products populated by JS -->
@@ -252,7 +259,7 @@
                                         <input type="text" id="zipCode" required>
                                     </div>
                                 </div>
-                                
+
                                 <h2>Payment Method</h2>
                                 <div class="payment-options">
                                     <label class="payment-option">
@@ -268,7 +275,7 @@
                                         <span><i class="fas fa-money-bill"></i> Cash on Delivery</span>
                                     </label>
                                 </div>
-                                
+
                                 <div id="cardDetails">
                                     <div class="form-group">
                                         <label>Card Number</label>
@@ -285,7 +292,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-primary btn-large btn-block">
                                     Place Order
                                 </button>
@@ -358,7 +365,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </form>
-                <p class="modal-footer">Don't have an account? <a href="#" onclick="switchModal('login', 'register')">Sign up</a></p>
+                <p class="modal-footer">Don't have an account? <a href="#"
+                        onclick="switchModal('login', 'register')">Sign up</a></p>
             </div>
         </div>
 
@@ -382,7 +390,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Create Account</button>
                 </form>
-                <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('register', 'login')">Login</a></p>
+                <p class="modal-footer">Already have an account? <a href="#"
+                        onclick="switchModal('register', 'login')">Login</a></p>
             </div>
         </div>
 
@@ -433,4 +442,5 @@
 
     <script src="ecommerce-script.js"></script>
 </body>
+
 </html>

@@ -218,7 +218,11 @@ let filteredJobs = [...sampleJobs];
 // PAGE NAVIGATION
 // =====================================
 
-function showPage(pageName) {
+function showPage(pageName, pushState = true) {
+    if (pushState) {
+        history.pushState({ pageName }, '', `#${pageName}`);
+    }
+
     // Hide all pages
     document.querySelectorAll('.page').forEach(page => {
         page.style.display = 'none';
@@ -796,4 +800,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load initial content
     loadFeaturedJobs();
+
+    const hash = window.location.hash.slice(1);
+    const initialPage = hash || 'home';
+    history.replaceState({ pageName: initialPage }, '', `#${initialPage}`);
+    showPage(initialPage, false);
+});
+
+window.addEventListener('popstate', (e) => {
+    const pageName = e.state ? e.state.pageName : 'home';
+    showPage(pageName, false);
 });

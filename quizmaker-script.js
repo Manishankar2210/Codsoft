@@ -103,7 +103,19 @@ let questionCount = 0;
 // PAGE NAVIGATION
 // =====================================
 
-function showPage(pageName) {
+function showPage(pageName, pushState = true) {
+    if (pageName === 'create' || pageName === 'dashboard') {
+        if (!currentUser) {
+            showModal('login');
+            showToast('Please login to access this page', 'error');
+            return;
+        }
+    }
+
+    if (pushState) {
+        history.pushState({ pageName }, '', `#${pageName}`);
+    }
+
     document.querySelectorAll('.page').forEach(page => {
         page.style.display = 'none';
     });
@@ -122,18 +134,9 @@ function showPage(pageName) {
             loadQuizList();
             break;
         case 'create':
-            if (!currentUser) {
-                showModal('login');
-                showToast('Please login to create quizzes', 'error');
-                return;
-            }
             initCreateQuiz();
             break;
         case 'dashboard':
-            if (!currentUser) {
-                showModal('login');
-                return;
-            }
             loadDashboard();
             break;
     }
@@ -709,4 +712,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load initial content
     loadPopularQuizzes();
+
+    const hash = window.location.hash.slice(1);
+    const initialPage = hash || 'home';
+    history.replaceState({ pageName: initialPage }, '', `#${initialPage}`);
+    showPage(initialPage, false);
+});
+
+window.addEventListener('popstate', (e) => {
+    const pageName = e.state ? e.state.pageName : 'home';
+    showPage(pageName, false);
 });

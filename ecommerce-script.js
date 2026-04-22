@@ -4,18 +4,26 @@
 
 // Sample Products Data
 const sampleProducts = [
-    { id: 1, name: 'Wireless Bluetooth Headphones', category: 'Electronics', price: 79.99, originalPrice: 99.99, rating: 4.5, reviews: 128, image: 'https://via.placeholder.com/300', description: 'Premium wireless headphones with active noise cancellation, 30-hour battery life, and comfortable over-ear design.', featured: true },
-    { id: 2, name: 'Smart Watch Pro', category: 'Electronics', price: 199.99, originalPrice: 249.99, rating: 4.7, reviews: 256, image: 'https://via.placeholder.com/300', description: 'Advanced smartwatch with health monitoring, GPS, and water resistance. Perfect for fitness enthusiasts.', featured: true },
-    { id: 3, name: 'Men\'s Classic Polo Shirt', category: 'Clothing', price: 34.99, originalPrice: 44.99, rating: 4.3, reviews: 89, image: 'https://via.placeholder.com/300', description: 'Classic fit polo shirt made from 100% cotton. Available in multiple colors.', featured: true },
-    { id: 4, name: 'Women\'s Running Shoes', category: 'Sports', price: 89.99, originalPrice: 119.99, rating: 4.6, reviews: 203, image: 'https://via.placeholder.com/300', description: 'Lightweight running shoes with responsive cushioning and breathable mesh upper.', featured: true },
-    { id: 5, name: 'Modern Table Lamp', category: 'Home', price: 49.99, originalPrice: 59.99, rating: 4.4, reviews: 67, image: 'https://via.placeholder.com/300', description: 'Elegant table lamp with adjustable brightness. Perfect for bedside or desk.', featured: true },
-    { id: 6, name: 'Laptop Stand Aluminum', category: 'Electronics', price: 39.99, originalPrice: 49.99, rating: 4.5, reviews: 142, image: 'https://via.placeholder.com/300', description: 'Ergonomic aluminum laptop stand for better posture. Compatible with all laptops up to 17 inches.', featured: true },
-    { id: 7, name: 'Cotton T-Shirt Pack', category: 'Clothing', price: 29.99, originalPrice: 39.99, rating: 4.2, reviews: 178, image: 'https://via.placeholder.com/300', description: 'Pack of 3 comfortable cotton t-shirts in black, white, and gray.', featured: false },
-    { id: 8, name: 'Yoga Mat Premium', category: 'Sports', price: 45.99, originalPrice: 55.99, rating: 4.8, reviews: 312, image: 'https://via.placeholder.com/300', description: 'Non-slip yoga mat with alignment lines. Extra thick for joint protection.', featured: true },
-    { id: 9, name: 'Decorative Throw Pillows', category: 'Home', price: 24.99, originalPrice: 32.99, rating: 4.3, reviews: 95, image: 'https://via.placeholder.com/300', description: 'Set of 2 decorative throw pillows. Soft velvet cover with hidden zipper.', featured: false },
-    { id: 10, name: 'Wireless Mouse', category: 'Electronics', price: 29.99, originalPrice: 39.99, rating: 4.4, reviews: 234, image: 'https://via.placeholder.com/300', description: 'Ergonomic wireless mouse with silent clicks and long battery life.', featured: false },
-    { id: 11, name: 'Denim Jacket', category: 'Clothing', price: 69.99, originalPrice: 89.99, rating: 4.6, reviews: 145, image: 'https://via.placeholder.com/300', description: 'Classic denim jacket with modern fit. Versatile for any casual occasion.', featured: true },
-    { id: 12, name: 'Fitness Resistance Bands', category: 'Sports', price: 19.99, originalPrice: 29.99, rating: 4.5, reviews: 289, image: 'https://via.placeholder.com/300', description: 'Set of 5 resistance bands with varying resistance levels for home workouts.', featured: false }
+    { id: 1, name: 'Wireless Bluetooth Headphones', category: 'Electronics', price: 79.99, originalPrice: 99.99, rating: 4.5, reviews: 128, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80', description: 'Premium wireless headphones with active noise cancellation, 30-hour battery life, and comfortable over-ear design.', featured: true },
+    { id: 2, name: 'Smart Watch Pro', category: 'Electronics', price: 199.99, originalPrice: 249.99, rating: 4.7, reviews: 256, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80', description: 'Advanced smartwatch with health monitoring, GPS, and water resistance. Perfect for fitness enthusiasts.', featured: true },
+    { id: 3, name: 'Men\'s Classic Polo Shirt', category: 'Clothing', price: 34.99, originalPrice: 44.99, rating: 4.3, reviews: 89, image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80', description: 'Classic fit polo shirt made from 100% cotton. Available in multiple colors.', featured: true },
+    { id: 4, name: 'Women\'s Running Shoes', category: 'Sports', price: 89.99, originalPrice: 119.99, rating: 4.6, reviews: 203, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80', description: 'Lightweight running shoes with responsive cushioning and breathable mesh upper.', featured: true },
+    { id: 5, name: 'Modern Table Lamp', category: 'Home', price: 49.99, originalPrice: 59.99, rating: 4.4, reviews: 67, image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80', description: 'Elegant table lamp with adjustable brightness. Perfect for bedside or desk.', featured: true },
+    { id: 6, name: 'Laptop Stand Aluminum', category: 'Electronics', price: 39.99, originalPrice: 49.99, rating: 4.5, reviews: 142, image: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80', description: 'Ergonomic aluminum laptop stand for better posture. Compatible with all laptops up to 17 inches.', featured: true },
+    { id: 7, name: 'Cotton T-Shirt Pack', category: 'Clothing', price: 29.99, originalPrice: 39.99, rating: 4.2, reviews: 178, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80', description: 'Pack of 3 comfortable cotton t-shirts in black, white, and gray.', featured: false },
+    { id: 8, name: 'Yoga Mat Premium', category: 'Sports', price: 45.99, originalPrice: 55.99, rating: 4.8, reviews: 312, image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500&q=80', description: 'Non-slip yoga mat with alignment lines. Extra thick for joint protection.', featured: true },
+    { id: 9, name: 'Decorative Throw Pillows', category: 'Home', price: 24.99, originalPrice: 32.99, rating: 4.3, reviews: 95, image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&q=80', description: 'Set of 2 decorative throw pillows. Soft velvet cover with hidden zipper.', featured: false },
+    { id: 10, name: 'Wireless Mouse', category: 'Electronics', price: 29.99, originalPrice: 39.99, rating: 4.4, reviews: 234, image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80', description: 'Ergonomic wireless mouse with silent clicks and long battery life.', featured: false },
+    { id: 11, name: 'Denim Jacket', category: 'Clothing', price: 69.99, originalPrice: 89.99, rating: 4.6, reviews: 145, image: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=500&q=80', description: 'Classic denim jacket with modern fit. Versatile for any casual occasion.', featured: true },
+    { id: 12, name: 'Fitness Resistance Bands', category: 'Sports', price: 19.99, originalPrice: 29.99, rating: 4.5, reviews: 289, image: 'https://images.unsplash.com/photo-1598289431512-b97b0a150b18?w=500&q=80', description: 'Set of 5 resistance bands with varying resistance levels for home workouts.', featured: false },
+    { id: 13, name: 'Gaming Keyboard', category: 'Electronics', price: 59.99, originalPrice: 79.99, rating: 4.8, reviews: 342, image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80', description: 'Mechanical gaming keyboard with RGB backlighting and custom switches.', featured: true },
+    { id: 14, name: 'Office Chair', category: 'Home', price: 129.99, originalPrice: 159.99, rating: 4.5, reviews: 215, image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=500&q=80', description: 'Ergonomic office chair with lumbar support and adjustable height.', featured: false },
+    { id: 15, name: 'Sunglasses', category: 'Clothing', price: 24.99, originalPrice: 34.99, rating: 4.3, reviews: 128, image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80', description: 'Stylish polarized sunglasses with UV protection.', featured: true },
+    { id: 16, name: 'Water Bottle', category: 'Sports', price: 14.99, originalPrice: 19.99, rating: 4.6, reviews: 450, image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80', description: 'Stainless steel insulated water bottle. Keeps drinks cold for 24 hours.', featured: false },
+    { id: 17, name: 'Bluetooth Speaker', category: 'Electronics', price: 45.99, originalPrice: 59.99, rating: 4.7, reviews: 310, image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80', description: 'Portable waterproof bluetooth speaker with deep bass and 12-hour playtime.', featured: true },
+    { id: 18, name: 'Coffee Maker', category: 'Home', price: 89.99, originalPrice: 109.99, rating: 4.4, reviews: 185, image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500&q=80', description: 'Programmable coffee maker with glass carafe and auto shut-off.', featured: false },
+    { id: 19, name: 'Leather Wallet', category: 'Clothing', price: 35.99, originalPrice: 45.99, rating: 4.9, reviews: 220, image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&q=80', description: 'Genuine leather bifold wallet with RFID blocking technology.', featured: false },
+    { id: 20, name: 'Dumbbell Set', category: 'Sports', price: 65.99, originalPrice: 85.99, rating: 4.6, reviews: 290, image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80', description: 'Adjustable dumbbell set with free weights for home gym workouts.', featured: true }
 ];
 
 // Application State
@@ -30,7 +38,17 @@ let selectedProduct = null;
 // PAGE NAVIGATION
 // =====================================
 
-function showPage(pageName) {
+function showPage(pageName, pushState = true) {
+    if ((pageName === 'cart' || pageName === 'checkout' || pageName === 'orders') && !currentUser) {
+        showToast('Please login to access this page', 'error');
+        showModal('login');
+        return;
+    }
+
+    if (pushState) {
+        history.pushState({ pageName }, '', `#${pageName}`);
+    }
+
     document.querySelectorAll('.page').forEach(page => {
         page.style.display = 'none';
     });
@@ -55,10 +73,6 @@ function showPage(pageName) {
             loadCheckout();
             break;
         case 'orders':
-            if (!currentUser) {
-                showModal('login');
-                return;
-            }
             loadOrders();
             break;
     }
@@ -189,6 +203,11 @@ function changeQuantity(delta) {
 }
 
 function addToCartWithQuantity() {
+    if (!currentUser) {
+        showToast('Please login to add items to cart', 'error');
+        showModal('login');
+        return;
+    }
     if (selectedProduct) {
         for (let i = 0; i < detailQuantity; i++) {
             addToCartSilent(selectedProduct.id);
@@ -265,6 +284,11 @@ function clearFilters() {
 // =====================================
 
 function addToCart(productId) {
+    if (!currentUser) {
+        showToast('Please login to add items to cart', 'error');
+        showModal('login');
+        return;
+    }
     addToCartSilent(productId);
     showToast('Added to cart', 'success');
 }
@@ -379,6 +403,11 @@ function loadSavedCart() {
 // =====================================
 
 function proceedToCheckout() {
+    if (!currentUser) {
+        showToast('Please login to checkout', 'error');
+        showModal('login');
+        return;
+    }
     if (cart.length === 0) {
         showToast('Your cart is empty', 'error');
         return;
@@ -611,4 +640,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load featured products
     loadFeaturedProducts();
+
+    const hash = window.location.hash.slice(1);
+    const initialPage = hash || 'home';
+    history.replaceState({ pageName: initialPage }, '', `#${initialPage}`);
+    showPage(initialPage, false);
+});
+
+window.addEventListener('popstate', (e) => {
+    const pageName = e.state ? e.state.pageName : 'home';
+    showPage(pageName, false);
 });

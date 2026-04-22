@@ -43,7 +43,11 @@ let editingTask = null;
 // PAGE NAVIGATION
 // =====================================
 
-function showPage(pageName) {
+function showPage(pageName, pushState = true) {
+    if (pushState) {
+        history.pushState({ pageName }, '', `#${pageName}`);
+    }
+
     // Update nav items
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     const navItem = document.querySelector(`.nav-item[onclick="showPage('${pageName}')"]`);
@@ -855,4 +859,14 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     loadDashboard();
     populateDropdowns();
+
+    const hash = window.location.hash.slice(1);
+    const initialPage = hash || 'dashboard';
+    history.replaceState({ pageName: initialPage }, '', `#${initialPage}`);
+    showPage(initialPage, false);
+});
+
+window.addEventListener('popstate', (e) => {
+    const pageName = e.state ? e.state.pageName : 'dashboard';
+    showPage(pageName, false);
 });
